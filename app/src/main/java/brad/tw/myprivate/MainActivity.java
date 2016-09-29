@@ -5,6 +5,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -101,9 +102,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void test1(View v){
         ContentResolver contentResolver = getContentResolver();
+
         String name = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
         String num = ContactsContract.CommonDataKinds.Phone.NUMBER;
 
+        Cursor c = contentResolver.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                ,new String[]{name,num},null,null,name);
 
     }
 
