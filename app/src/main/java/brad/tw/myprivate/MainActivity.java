@@ -6,6 +6,7 @@ import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -117,9 +118,34 @@ public class MainActivity extends AppCompatActivity {
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI
                 ,new String[]{name,num},null,null,name);
 
+        int count = c.getCount();
+        Log.d("brad", "Count:" +count);
+
         while (c.moveToNext()){
             String dname = c.getString(c.getColumnIndex(name));
             String dnum = c.getString(c.getColumnIndex(num));
+            Log.d("brad", dname + ":" + dnum);
+        }
+
+    }
+    public void test2(View v){
+        ContentResolver contentResolver = getContentResolver();
+
+        Uri sim = Uri.parse("content://icc/adn");
+
+        String name = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
+        String num = ContactsContract.CommonDataKinds.Phone.NUMBER;
+
+        Cursor c = contentResolver.query(
+                sim
+                ,null,null,null,name);
+
+        int count = c.getCount();
+        Log.d("brad", "Count:" +count);
+
+        while (c.moveToNext()){
+            String dname = c.getString(c.getColumnIndex("name"));
+            String dnum = c.getString(c.getColumnIndex("number"));
             Log.d("brad", dname + ":" + dnum);
         }
 
