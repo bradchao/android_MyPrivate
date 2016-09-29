@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.GET_ACCOUNTS},
                         1);
             }
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_CONTACTS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        1);
+            }
         }
 
         tmgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
@@ -109,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
         Cursor c = contentResolver.query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI
                 ,new String[]{name,num},null,null,name);
+
+        while (c.moveToNext()){
+            String dname = c.getString(c.getColumnIndex(name));
+            String dnum = c.getString(c.getColumnIndex(num));
+            Log.d("brad", dname + ":" + dnum);
+        }
 
     }
 
