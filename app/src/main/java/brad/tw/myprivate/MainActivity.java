@@ -3,8 +3,10 @@ package brad.tw.myprivate;
 import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private TelephonyManager tmgr;
@@ -47,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                         1);
             }
         }
-
 
         tmgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
 
@@ -96,4 +98,13 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     }
+
+    public void test1(View v){
+        ContentResolver contentResolver = getContentResolver();
+        String name = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
+        String num = ContactsContract.CommonDataKinds.Phone.NUMBER;
+
+
+    }
+
 }
